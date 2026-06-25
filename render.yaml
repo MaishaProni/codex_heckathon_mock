@@ -1,0 +1,20 @@
+# Render Blueprint — one-click HTTPS deploy (free plan)
+#
+# Usage:
+#   1. Push this repo to GitHub.
+#   2. In Render dashboard, choose "New +" -> "Blueprint" and select this repo.
+#   3. Render detects render.yaml and provisions the service + HTTPS URL.
+services:
+  - type: web
+    name: queue-classifier
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    autoDeploy: true
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: "8000"
+      - key: LOG_LEVEL
+        value: info
